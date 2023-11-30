@@ -1,18 +1,13 @@
 import modules.scripts as scripts
-#from pathlib import Path
-#import platform
 import gradio as gr
 import os
-#import pathlib
-#import glob
-#import re
 
 from modules import script_callbacks
 
+
 def load_note():
     
-    filename = "hotarunote.txt"
-    path = os.path.join(scripts.basedir(), "extensions", "sd-webui-hotarunote", "data", filename)
+    path = os.path.join(scripts.basedir(), "extensions", "sd-webui-hotarunote", "data", "hotarunote.txt")
     if not os.path.exists(path):
         f = open(path, 'w')
         f.close()
@@ -26,22 +21,20 @@ def load_note():
 
 def save_note(notetextarea):
     
-    filename = "hotarunote.txt"
-    path = os.path.join(scripts.basedir(), "extensions", "sd-webui-hotarunote", "data", filename)
+    path = os.path.join(scripts.basedir(), "extensions", "sd-webui-hotarunote", "data", "hotarunote.txt")
     f = open(path, 'w')
     f.write(notetextarea)
     f.close()
 
 
-def create_dir():
+def on_ui_tabs():
+    
+    # Create data directory
     path = os.path.join(scripts.basedir(), "extensions", "sd-webui-hotarunote", "data")
     if not os.path.exists(path):
         os.makedirs(path)    
 
-
-def on_ui_tabs():
-    create_dir()
-
+    # Setup UI
     with gr.Blocks(analytics_enabled=False) as ui_component:
 
         notetextarea = gr.Textbox(value=load_note(), interactive=True, lines=20, max_lines=200)
