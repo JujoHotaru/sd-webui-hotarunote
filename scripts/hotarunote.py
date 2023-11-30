@@ -9,10 +9,10 @@ def load_note():
     
     path = os.path.join(scripts.basedir(), "extensions", "sd-webui-hotarunote", "data", "hotarunote.txt")
     if not os.path.exists(path):
-        f = open(path, 'w')
+        f = open(path, 'w', encoding='utf-8')
         f.close()
 
-    f = open(path, 'r')
+    f = open(path, 'r', encoding='utf-8')
     txt = f.read()
     f.close()
 
@@ -22,7 +22,7 @@ def load_note():
 def save_note(notetextarea):
     
     path = os.path.join(scripts.basedir(), "extensions", "sd-webui-hotarunote", "data", "hotarunote.txt")
-    f = open(path, 'w')
+    f = open(path, 'w', encoding='utf-8')
     f.write(notetextarea)
     f.close()
 
